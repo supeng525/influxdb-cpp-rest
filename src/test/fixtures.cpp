@@ -23,8 +23,8 @@ connected_test::connected_test() :
 
 connected_test::~connected_test() {
     try {
-        raw_db.post(std::string("drop database ") + db_name);
-        wait_for_no_db(db_name);
+       /* raw_db.post(std::string("drop database ") + db_name);
+        wait_for_no_db(db_name);*/
     }
     catch (std::exception& e) {
         std::cerr << "FAILED: " << e.what() << std::endl;

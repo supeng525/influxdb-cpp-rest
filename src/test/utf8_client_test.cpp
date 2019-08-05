@@ -10,33 +10,33 @@
 
 #include "fixtures.h"
 
-TEST_CASE_METHOD(connected_test, "creating a database", "[connected]") {
-    CHECK(database_exists("testdb"));
-}
-
-
-TEST_CASE_METHOD(connected_test, "posting simple values", "[connected]") {
-    auto testdb_test_entries = [this]() {
-        return raw_db.get("select * from testdb..test");
-    };
-    CHECK(testdb_test_entries().find("hello") == std::string::npos);
-
-    raw_db.insert("test value=\"hello\"");
-
-    wait_for([] {return false; }, 3);
-
-    CHECK(testdb_test_entries().find("hello") != std::string::npos);
-}
-
-TEST_CASE_METHOD(connected_test, "line protocol violation results in an exception", "[connected]") {
-    CHECK_THROWS(raw_db.insert("bla bla bla"));
-}
-
-TEST_CASE_METHOD(connected_test, "gibberish query results in an exception", "[connected]") {
-    CHECK_THROWS(raw_db.get("bla bla bla"));
-}
-
-TEST_CASE("connecting to a nonexistent db results in an exception") {
-    influxdb::raw::db_utf8 db("http://localhost:424242", "testdb");
-    CHECK_THROWS(db.get("show databases"));
-}
+//TEST_CASE_METHOD(connected_test, "creating a database", "[connected]") {
+//    CHECK(database_exists("testdb"));
+//}
+//
+//
+//TEST_CASE_METHOD(connected_test, "posting simple values", "[connected]") {
+//    auto testdb_test_entries = [this]() {
+//        return raw_db.get("select * from testdb..test");
+//    };
+//    CHECK(testdb_test_entries().find("hello") == std::string::npos);
+//
+//    raw_db.insert("test value=\"hello\"");
+//
+//    wait_for([] {return false; }, 3);
+//
+//    CHECK(testdb_test_entries().find("hello") != std::string::npos);
+//}
+//
+//TEST_CASE_METHOD(connected_test, "line protocol violation results in an exception", "[connected]") {
+//    CHECK_THROWS(raw_db.insert("bla bla bla"));
+//}
+//
+//TEST_CASE_METHOD(connected_test, "gibberish query results in an exception", "[connected]") {
+//    CHECK_THROWS(raw_db.get("bla bla bla"));
+//}
+//
+//TEST_CASE("connecting to a nonexistent db results in an exception") {
+//    influxdb::raw::db_utf8 db("http://localhost:424242", "testdb");
+//    CHECK_THROWS(db.get("show databases"));
+//}
